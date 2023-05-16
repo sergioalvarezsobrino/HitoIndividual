@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: cornflowerblue;
+}
+
+h1 {
+    text-align: center;
+    color: crimson;
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: chartreuse;
+}
+
+.tabla th,
+.tabla td {
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+    .tabla th,
+    .tabla td {
+        font-size: 14px;
+    }
+}
+

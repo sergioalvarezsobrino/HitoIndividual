@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link rel="stylesheet" href="paths.css">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtros</title>
+    <style>
+        .tabla {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .tabla th,
+        .tabla td {
+            padding: 8px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            .tabla th,
+            .tabla td {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Tabla</h1>
+    <div id="mi-tabla"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function crearTabla(informacion) {
+            let html = "<table class='tabla'><thead><tr><th>Código de la provincia</th><th>Nombre de la provincia</th><th>Código de la Comunidad Autónoma</th><th>Comunidad autónoma a la que pertenece</th><th>Capital</th></tr></thead><tbody>";
+            informacion.forEach((provincias) => {
+                html += `<tr><td>${provincias.CODPROV}</td><td>${provincias.NOMBRE_PROVINCIA}</td><td>${provincias.CODAUTON}</td><td>${provincias.COMUNIDAD_CIUDAD_AUTONOMA}</td> <td>${provincias.CAPITAL_PROVINCIA}</td></tr>`;
+            });
+            html += "</tbody></table>";
+            return html;
+        }
+
+        fetch('https://www.el-tiempo.net/api/json/v2/provincias')
+            .then(res => res.json())
+            .then(data => {
+                const informacion = data.provincias;
+                const tablaHtml = crearTabla(informacion);
+                document.getElementById("mi-tabla").innerHTML = tablaHtml;
+            })
+            .catch(err => console.error(err));
+    </script>
+</body>
+</html>
+
+
